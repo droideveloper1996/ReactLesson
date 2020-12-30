@@ -2,7 +2,29 @@ import React, { Component } from "react";
 import ABC from "./abc.jsx";
 
 class NavbarComponent extends Component {
+
+  //LifeCycle 
+
+  constructor(){
+    super();
+    console.log("constructor")
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount")
+  }
+
+  componentDidUpdate() {
+    console.log("componentDidUpdate")
+  }
+
+  componentWillUnmount(){
+    console.log("componentWillUnmount")
+  }
+  
+
   render() {
+    console.log('render')
     return (
       <nav className="navbar navbar-light bg-light">
         <div className="container-fluid">

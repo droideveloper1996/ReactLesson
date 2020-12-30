@@ -9,6 +9,7 @@ import CounterComponent from "./components/counter";
 import { Route, Link, BrowserRouter, Switch } from "react-router-dom";
 import XYZ from "./components/xyz";
 import LoginComponent from "./components/LoginForm";
+import SignupComponent from "./components/signup";
 
 // const axiosInstance = axios.create({
 //   baseURL: "https://jsonplaceholder.typicode.com/todos/1",
@@ -66,7 +67,9 @@ function App() {
         <Switch>
           <Route path="/" component={CounterComponent} exact={true} />
           <Route path="/login" component={LoginComponent} />
+          <Route path="/signup" component={SignupComponent} />
           <Route path="/xyz" component={XYZ} />
+
         </Switch>
       </BrowserRouter>
     </React.Fragment>

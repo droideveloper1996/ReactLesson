@@ -2,20 +2,48 @@ import React, { Component } from "react";
 class LoginComponent extends Component {
   userRef = React.createRef();
   passRef = React.createRef();
-
   state = {
     account: {
       username: "",
       password: "",
     },
-    error: {},
+    errors: {},
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log("Initial Errors Object Before Validation ",Object.keys(this.state.errors).length)
+    this.validate();
+
     //Validate Inputs
+
     //Handle Network Calls
+  };
+
+  validate = () => {
+    console.log("Validate Function Called");
+    const accountCopy = { ...this.state.account };
+    let error = {};
+    if ( accountCopy["username"] === "") {
+      error["username"] = "Username is not valid or is Empty";
+    }
+    if ( accountCopy["password"] === "") {
+      error["password"] = "Password is Empty";
+      if (accountCopy["password"].length < 6) {
+        error["password"] = "Password Must be atleast 6 chacters";
+      }
+    }
+    this.setState({
+      errors: error,
+    });
+
+    console.log("Initial Errors Object After Validation ",Object.keys(error).length)
+
+    if(Object.keys(error).length>0){
+      return true;
+    }
+    return false;
   };
 
   handleChange = (e) => {
@@ -35,7 +63,7 @@ class LoginComponent extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <form>
           <div className="form-group">
             <label htmlFor="">Username</label>
@@ -48,6 +76,7 @@ class LoginComponent extends Component {
               placeholder="Username"
               onChange={this.handleChange}
             />
+        { Object.keys(this.state.errors).length>0 &&  <div className="alert alert-danger"> Error Message for Username</div>}
           </div>
           <div className="form-group">
             <label htmlFor=""></label>
@@ -58,6 +87,7 @@ class LoginComponent extends Component {
               onChange={this.handleChange}
               placeholder="Password"
             />
+           { Object.keys(this.state.errors).length>0 &&  <div className="alert alert-danger"> Error Message for password</div>}
           </div>
 
           <button
